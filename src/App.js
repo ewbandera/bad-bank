@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Route} from 'react-router-dom';
-import {HashRouter} from 'react-router-dom';
+import {Route, HashRouter} from 'react-router-dom';
 import AllData from './components/alldata';
 import Balance from './components/balance';
 import CreateAccount from './components/createaccount';

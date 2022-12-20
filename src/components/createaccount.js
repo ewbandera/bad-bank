@@ -1,6 +1,5 @@
 import React from 'react';
-import{Card} from 'react-bootstrap';
-const UserContext = React.createContext(null);
+import {UserContext,Card} from './context'
 
 function CreateAccount(){
   const [show, setShow]         = React.useState(true);

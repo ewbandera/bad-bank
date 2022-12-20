@@ -1,4 +1,3 @@
-import {Route,Link,HashRouter} from 'react-router-dom';
 function NavBar(){
   return(
     <>
