@@ -8,13 +8,13 @@ import Home from './components/home';
 import Login from './components/login';
 import NavBar from './components/navbar';
 import Withdraw from './components/withdraw';
+import {UserContext} from './components/context'
 
-const UserContext = React.createContext(null);
 function App() {
   return (
     <HashRouter>
       <NavBar/>
-      <UserContext.Provider value={{users:[{name:'abel',email:'abel@mit.edu',password:'secret',balance:100}]}}>
+      <UserContext.Provider value={{users:[{name:'Eric Bandera',email:'ericbandera@gmail.com',password:'1234',balance:100}]}}>
         <div className="container" style={{padding: "20px"}}>
           <Route path="/" exact component={Home} />
           <Route path="/createaccount/" component={CreateAccount} />
