@@ -23,6 +23,9 @@ function CreateAccount(){
     if (!validate(name,     'name'))     return;
     if (!validate(email,    'email'))    return;
     if (!validate(password, 'password')) return;
+    if(ctx.users==undefined){
+      ctx.users = [];
+    }
     ctx.users.push({name,email,password,balance:100});
     setShow(false);
   }    

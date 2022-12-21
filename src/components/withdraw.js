@@ -10,17 +10,16 @@ function Withdraw(){
     ctx.currentUser.balance = (Number(ctx.currentUser.balance) - Number(amount)).toFixed(2);
     setStatus('The Withdraw Is Completed');
     setShow(false);
-
   }
   function isLoggedIn() {
-    return (ctx.currentUser);
+    let results = (ctx.currentUser!=undefined);
+    return results;
   }
   function clearForm()
   {
     setAmount(0);
     setShow(true);
     setStatus('');
-
   }
   return (
     <Card
@@ -48,7 +47,6 @@ function Withdraw(){
           <button type="submit" className="btn btn-light" onClick={clearForm}>Ok</button>
         </>
         )
-        
       }
     />
   );

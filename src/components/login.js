@@ -1,6 +1,6 @@
 import React from 'react';
 import {UserContext,Card} from './context'
-function Login(){
+function Login(props){
   const ctx = React.useContext(UserContext);
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -18,6 +18,7 @@ function Login(){
       console.log(JSON.stringify(ctx));
       setStatus('You Are Successfully Logged In');
       setShow(false);
+      props.reloadCallback(ctx);
     }
     else{
       ctx.currentUser = null;
