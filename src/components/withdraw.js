@@ -7,9 +7,32 @@ function Withdraw(){
   const [show, setShow]         = React.useState(true);
 
   function handleWithdraw() {
-    ctx.currentUser.balance = (Number(ctx.currentUser.balance) - Number(amount)).toFixed(2);
-    setStatus('The Withdraw Is Completed');
-    setShow(false);
+    if(validate()) {
+      ctx.currentUser.balance = (Number(ctx.currentUser.balance) - Number(amount)).toFixed(2);
+      setStatus('The Withdraw Is Completed');
+      setShow(false);
+    }
+    
+  }
+  function validate()
+  {
+    if(!validateIsNumberGreaterThanZero()){
+      setStatus('Please enter a numerical amount to withdraw greater than $0');
+      return false;
+    }
+    if(!validateHasEnoughForTransaction()){
+      setStatus('The transaction cannot be completed.  Please see our credit department for a loan.  Interest rates start as low as 17.99%');
+      return false;
+    }
+    return true;
+  }
+   const validateHasEnoughForTransaction = () => (Number(amount)<=Number(ctx.currentUser.balance));
+    
+  
+  function validateIsNumberGreaterThanZero()
+  {
+    let isNumber =  !isNaN(amount);
+    return (isNumber && Number(amount)>0);
   }
   function isLoggedIn() {
     let results = (ctx.currentUser!=undefined);
@@ -22,25 +45,34 @@ function Withdraw(){
     setStatus('');
   }
   return (
+    <>
+    <h1>Withdraw</h1>
     <Card
-      bgcolor="info"
       txtcolor="black"
-      header="Withdraw"
+      bgcolor="#D7E4EA"
       status={status}
       body={  
         show ? (
           (isLoggedIn())? (
-            <>
-            Withdraw Amount<br/>
-            <input type="number" min="0.01" step="0.01" max="2500" className="form-control" id="amount" onChange={e => setAmount(e.currentTarget.value)}/><br/>
-            <button type="submit" className="btn btn-light" onClick={handleWithdraw}>Withdraw</button>
-            </>
-            ):(
+            <table className="cardTable">
+              <tbody>
+                <tr><td width="80%">Balance</td><td>$ {ctx.currentUser.balance}</td></tr>
+                <tr>
+                  <td colSpan="2">Withdraw Amount<br/>
+                    <div className="moneyInput">
+                      <input type="number" min="0.01" step="0.01" max="2500" className="form-control" id="amount" onChange={e => setAmount(e.currentTarget.value)}/>
+                    </div>
+                    
+                  </td>
+                </tr>
+                <tr><td colSpan="2" className="cardBtn"><button type="submit" className="btn btn-light" onClick={handleWithdraw}>Withdraw</button></td></tr>
+              </tbody>
+            </table>):(
               <>
               <p>You must be logged in to access this feature</p>
               <a href="#/login/" className="btn btn-light">Login</a>
               </>
-            )
+            )    
         ):(
           <>
           <h5>Success</h5>
@@ -49,6 +81,7 @@ function Withdraw(){
         )
       }
     />
+    </>
   );
 }
 export default Withdraw;

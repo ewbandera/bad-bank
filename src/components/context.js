@@ -2,14 +2,23 @@ import React from 'react';
 export const UserContext = React.createContext(null);
 
 export function Card(props){
+   
     function classes(){
-      const bg  = props.bgcolor ? ' bg-' + props.bgcolor : ' ';
+      //const bg  = props.bgcolor ? ' bg-' + props.bgcolor : ' ';
       const txt = props.txtcolor ? ' text-' + props.txtcolor: ' text-white';
-      return 'card mb-3 ' + bg + txt;
+      return 'card mb-3 ' + txt;
+    }
+    function styles(){
+      let baseStyles = {
+        maxWidth:"25rem"
+      }
+      const bg = props.bgcolor ? {backgroundColor: props.bgcolor}:{backgroundColor:"white"};//white is default
+      baseStyles={...baseStyles,...bg};
+      return baseStyles
     }
   
     return (
-      <div className={classes()} style={{maxWidth: "18rem"}}>
+      <div className={classes()} style={styles()}>
         <div className="card-header">{props.header}</div>
         <div className="card-body">
           {props.title && (<h5 className="card-title">{props.title}</h5>)}

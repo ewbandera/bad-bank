@@ -9,40 +9,38 @@ function NavBar(){
 
   return(
     <>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-inverse">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-inverse">
       <div className = "container-fluid">
-        <a className="navbar-brand" href="#">BadBank</a>
+        <a className="navbar-brand" href="#">Bad Bank</a>
         
-          <ul className="navbar-nav mr-auto">
-            
-            <li className="nav-item">
-              <a className="nav-link" href="#/deposit/">Deposit</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/withdraw/">Withdraw</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/balance/">Balance</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/alldata/">AllData</a>
-            </li>          
-          </ul>
+          
           <ul className="nav navbar-nav navbar-right">
             {(!isLoggedIn()) ? (
              <>
+            <li className="nav-item">
+              <a className="nav-link"  style={{paddingTop:'15px'}} href="#/alldata/">AllData</a>
+            </li> 
              <li className="nav-item"><a href="#/createaccount/" className="nav-link"><span className="fa-stack fa-lg">
                <i className="fa fa-square-o fa-stack-2x"></i>
                <i className="fa fa-user fa-stack-1x"></i>
                </span> Create Account</a>
              </li>
-             <li className="nav-item"><a href="#/login/" className="nav-link"><span className="fa-stack fa-lg">
+             <li className="nav-item"><a href="#/login/" className="nav-link" id="loginControl"><span className="fa-stack fa-lg">
                <i className="fa fa-sign-in fa-stack-2x" aria-hidden="true"></i>            
                </span> Login</a>
             </li>
             </>          
             ):(
               <>
+              <li className="nav-item">
+                <a className="nav-link" style={{paddingTop:'15px'}} href="#/deposit/">Deposit</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" style={{paddingTop:'15px'}} href="#/withdraw/">Withdraw</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" style={{paddingTop:'15px'}} href="#/alldata/">AllData</a>
+              </li> 
               <li className="nav-item"><a href="#/logout/" className="nav-link"><span className="fa-stack fa-lg">
               <i className="fa fa-square-o fa-stack-2x"></i>
               <i className="fa fa-user fa-stack-1x"></i>

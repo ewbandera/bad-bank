@@ -1,5 +1,6 @@
 import React from 'react';
 import {UserContext,Card} from './context'
+import md5 from 'md5';
 function Login(props){
   const ctx = React.useContext(UserContext);
   const [email, setEmail]       = React.useState('');
@@ -11,7 +12,7 @@ function Login(props){
     const currentLoginUser = ctx.users.filter(x => x.email===email);
     console.log(currentLoginUser.length);
     console.log(JSON.stringify(currentLoginUser));
-    if(currentLoginUser.length===1 && currentLoginUser[0].password===password)
+    if(currentLoginUser.length===1 && currentLoginUser[0].password===md5(password))
     {
       console.log(password);
       ctx.currentUser = currentLoginUser[0];
@@ -35,11 +36,11 @@ function Login(props){
     setStatus('');
   }
   return (
-   
+    <>
+    <h1>Login</h1>
     <Card
-      bgcolor="warning"
-      txtcolor="black"
-      header="Login"
+      bgcolor="#30718E"
+      header="Please Login"
       status={status}
       body={show ? (  
         <>
@@ -47,7 +48,9 @@ function Login(props){
         <input type="input" className="form-control" id="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.currentTarget.value)} /><br/>
         Password<br/>
         <input type="password" className="form-control" id="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.currentTarget.value)}/><br/>
-        <button type="submit" className="btn btn-light" onClick={handleLogin}>Login</button>
+        <div className="cardBtn">
+          <a id="loginButton" type="submit" className="btn btn-light" href="#/" onClick={handleLogin}>Login</a>
+        </div>
         </>
       ):(
         <>
@@ -56,6 +59,7 @@ function Login(props){
         </>
       )}             
     />
+    </>
   );
     
    
