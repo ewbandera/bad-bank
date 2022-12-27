@@ -12,7 +12,7 @@ function CreateAccount(){
 
   function validate(field, label){
       if (!field) {
-        setStatus('Error: ' + label);
+        setStatus(`The ${label} field is missing`);
         setTimeout(() => setStatus(''),3000);
         return false;
       }
@@ -25,6 +25,7 @@ function CreateAccount(){
     }
     else{
       setStatus('Email not in valid form');
+      setTimeout(() => setStatus(''),3000);
       return false
     }
   }
@@ -36,6 +37,7 @@ function CreateAccount(){
     }
     else{
       setStatus('Password must have one upper, one lower, a special character, and be length 8');
+      setTimeout(() => setStatus(''),3000);
       return false
     }
   }

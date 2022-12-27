@@ -5,10 +5,11 @@ function Deposit(){
   const [amount, setAmount] = React.useState(0);
   const [status, setStatus]     = React.useState('');
   const [show, setShow]         = React.useState(true);
+  const [btDisabled, setBtDisabled] = React.useState(true);
 
 
   function handleDeposit() {
-    if(validateIsNumberGreaterThanZero())
+    if(validate(amount))
     {
       ctx.currentUser.balance = (Number(ctx.currentUser.balance) + Number(amount)).toFixed(2);
       setStatus('The Deposit Is Completed');
@@ -19,11 +20,38 @@ function Deposit(){
       setStatus('Please enter a numerical amount to deposit greater than $0');
     }
   }
-  function validateIsNumberGreaterThanZero()
+  function handleChange(input)
   {
-    let isNumber =  !isNaN(amount);
-    return (isNumber && Number(amount)>0);
+     if(validate(input))
+     {
+      setBtDisabled(false);
+      setStatus('');
+      setAmount(input);
+     }
+     else{
+      setBtDisabled(true);
+     }
+    
   }
+  function validate(input)
+  {
+    if(!validateHasContent(input)){
+      setStatus('');
+      return false;
+    }
+    if(!validateIsNumber(input)){
+      setStatus('Please enter a numerical value');
+      return false;
+    }
+    if(!validateIsGreaterThanZero(input)){
+      setStatus('Please enter a value greater than $0');
+      return false;
+    }
+    return true;
+  }
+  const validateHasContent = (input)=> (input.length>0);
+  const validateIsNumber = (input)  => (!isNaN(input));
+  const validateIsGreaterThanZero = (input) => (Number(input)>0);
   function isLoggedIn() {
     return (ctx.currentUser);
   }
@@ -50,12 +78,12 @@ function Deposit(){
                 <tr>
                   <td colSpan="2">Deposit Amount<br/>
                     <div className="moneyInput">
-                      <input type="number" min="0.01" step="0.01" max="2500" className="form-control" id="amount" onChange={e => setAmount(e.currentTarget.value)}/>
+                      <input type="text" min="0.01" step="0.01" max="2500" className="form-control" id="amount" onChange={e => handleChange(e.currentTarget.value)}/>
                     </div>
                     
                   </td>
                 </tr>
-                <tr><td colSpan="2" className="cardBtn"><button type="submit" className="btn btn-light" onClick={handleDeposit}>Deposit</button></td></tr>
+                <tr><td colSpan="2" className="cardBtn"><button type="submit" className="btn btn-light" disabled={btDisabled} onClick={handleDeposit}>Deposit</button></td></tr>
               </tbody>
             </table>
             </>

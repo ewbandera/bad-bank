@@ -5,41 +5,59 @@ function Withdraw(){
   const [amount, setAmount] = React.useState(0);
   const [status, setStatus]     = React.useState('');
   const [show, setShow]         = React.useState(true);
+  const [btDisabled, setBtDisabled] = React.useState(true);
 
   function handleWithdraw() {
-    if(validate()) {
+    if(validate(amount)) {
       ctx.currentUser.balance = (Number(ctx.currentUser.balance) - Number(amount)).toFixed(2);
       setStatus('The Withdraw Is Completed');
       setShow(false);
     }
+  }
+
+  function handleChange(input)
+  {
+     if(validate(input))
+     {
+      setBtDisabled(false);
+      setStatus('');
+      setAmount(input);
+     }
+     else{
+      setBtDisabled(true);
+     }
     
   }
-  function validate()
+  function validate(input)
   {
-    if(!validateIsNumberGreaterThanZero()){
-      setStatus('Please enter a numerical amount to withdraw greater than $0');
+    if(!validateHasContent(input)){
+      setStatus('');
       return false;
     }
-    if(!validateHasEnoughForTransaction()){
+    if(!validateIsNumber(input)){
+      setStatus('Please enter a numerical value');
+      return false;
+    }
+    if(!validateIsGreaterThanZero(input)){
+      setStatus('Please enter a value greater than $0');
+      return false;
+    }
+    if(!validateHasEnoughForTransaction(input)){
       setStatus('The transaction cannot be completed.  Please see our credit department for a loan.  Interest rates start as low as 17.99%');
       return false;
     }
     return true;
   }
-   const validateHasEnoughForTransaction = () => (Number(amount)<=Number(ctx.currentUser.balance));
-    
+  const validateHasContent = (input)=> (input.length>0);
+  const validateHasEnoughForTransaction = (input) => (Number(input)<=Number(ctx.currentUser.balance));
+  const validateIsNumber = (input)  => (!isNaN(input));
+  const validateIsGreaterThanZero = (input) => (Number(input)>0);
   
-  function validateIsNumberGreaterThanZero()
-  {
-    let isNumber =  !isNaN(amount);
-    return (isNumber && Number(amount)>0);
-  }
   function isLoggedIn() {
     let results = (ctx.currentUser!=undefined);
     return results;
   }
-  function clearForm()
-  {
+  function clearForm()  {
     setAmount(0);
     setShow(true);
     setStatus('');
@@ -60,12 +78,12 @@ function Withdraw(){
                 <tr>
                   <td colSpan="2">Withdraw Amount<br/>
                     <div className="moneyInput">
-                      <input type="number" min="0.01" step="0.01" max="2500" className="form-control" id="amount" onChange={e => setAmount(e.currentTarget.value)}/>
+                      <input type="text" min="0.01" step="0.01" max="2500" className="form-control" id="amount" onChange={e => handleChange(e.currentTarget.value)}/>
                     </div>
                     
                   </td>
                 </tr>
-                <tr><td colSpan="2" className="cardBtn"><button type="submit" className="btn btn-light" onClick={handleWithdraw}>Withdraw</button></td></tr>
+                <tr><td colSpan="2" className="cardBtn"><button type="submit" disabled={btDisabled} className="btn btn-light" onClick={handleWithdraw}>Withdraw</button></td></tr>
               </tbody>
             </table>):(
               <>
