@@ -1,6 +1,6 @@
 import React from 'react';
 import {UserContext,Card} from './context'
-import md5 from 'md5';
+
 function Login(props){
   const ctx = React.useContext(UserContext);
   const [email, setEmail]       = React.useState('');
@@ -12,7 +12,7 @@ function Login(props){
     const currentLoginUser = ctx.users.filter(x => x.email===email);
     console.log(currentLoginUser.length);
     console.log(JSON.stringify(currentLoginUser));
-    if(currentLoginUser.length===1 && currentLoginUser[0].password===md5(password))
+    if(currentLoginUser.length===1 && currentLoginUser[0].password===password)
     {
       console.log(password);
       ctx.currentUser = currentLoginUser[0];

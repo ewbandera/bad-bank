@@ -1,9 +1,8 @@
 import React from 'react';
 import {UserContext,Card} from './context';
-import md5 from 'md5';
 
 function CreateAccount(){
-  const [again, setAgain]         = React.useState(false);
+  const [show, setShow]         = React.useState(false);
   const [status, setStatus]     = React.useState('');
   const [name, setName]         = React.useState('');
   const [email, setEmail]       = React.useState('');
@@ -52,11 +51,11 @@ function CreateAccount(){
     if(ctx.users==undefined){
       ctx.users = [];
     }
-    ctx.users.push({name,email,password:md5(password),balance:100});
+    ctx.users.push({name,email,password,balance:100});
     alert('Successfully Created Account');
     clearForm();
     setStatus('');
-    setAgain(true);
+    setShow(true);
   }    
 
   function clearForm(){
@@ -72,7 +71,7 @@ function CreateAccount(){
     <Card
       bgcolor="#30718E"
       status={status}
-      body={  
+      body={  !show ?(
               <>
               Name<br/>
               <input type="input" className="form-control" id="name" placeholder="Enter name" value={name} onChange={e => setName(e.currentTarget.value)} /><br/>
@@ -81,9 +80,14 @@ function CreateAccount(){
               Password<br/>
               <input type="password" className="form-control" id="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.currentTarget.value)}/><br/>
               <div className="cardBtn">
-                <button type="submit" className="btn btn-light" onClick={handleCreate}>{(again)? "Create Another Account": "Create Account"}</button>
+                <button type="submit" className="btn btn-light" onClick={handleCreate}>Create Account</button>
               </div>
-              </>
+              </>):(
+                <div className="cardBtn">
+                  <button type="submit" className="btn btn-light" onClick={()=>setShow(false)}>Create Another Account</button>
+                </div>
+
+              )
             } />
     
     </>

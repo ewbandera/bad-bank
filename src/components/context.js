@@ -12,8 +12,13 @@ export function Card(props){
       let baseStyles = {
         maxWidth:"25rem"
       }
-      const bg = props.bgcolor ? {backgroundColor: props.bgcolor}:{backgroundColor:"white"};//white is default
-      baseStyles={...baseStyles,...bg};
+      const newStyles = {};
+      if(props.bgcolor) { newStyles.backgroundColor = props.bgcolor;} 
+      if(props.width) {
+        delete baseStyles['maxWidth'];
+        newStyles.width=props.width;
+      }
+      baseStyles={...baseStyles,...newStyles};
       return baseStyles
     }
   

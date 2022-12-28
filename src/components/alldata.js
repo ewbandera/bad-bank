@@ -1,10 +1,10 @@
 import React from 'react';
-import { NavItem } from 'react-bootstrap';
+import { Table} from 'react-bootstrap';
 import {UserContext,Card} from './context'
 
 function AllData(){
   const ctx = React.useContext(UserContext);
-  function getTable(){
+  function getRows(){
     return  ctx.users.map((item,i)=>
       <tr key={i}>
         <td>{item.email}</td>
@@ -15,20 +15,30 @@ function AllData(){
   }
   return (
     <>
-    <h5>All Data in Store</h5>
     
-    <table className="allDataTable">
-      <thead>
-        <tr>
-          <th>Email</th>
-          <th>Name</th>
-          <th>Password (hash)</th>
-        </tr>
-      </thead>
-      <tbody>{getTable()}
-      </tbody>
-    </table>
-    {JSON.stringify(ctx)}
+    <Card
+    header="All Data In Store"
+      txtcolor="black"
+      bgcolor="#FFFFF"
+      width="100%"
+      text="User's In Sytstem"
+      body={
+          <>
+            <Table striped bordered>
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Name</th>
+                  <th>Password</th>
+                </tr>
+              </thead>
+              <tbody>{getRows()}
+              </tbody>
+            </Table>
+            <p>Data Dump</p>
+            {JSON.stringify(ctx)}
+          </>
+          } />
     </>
   );
 }

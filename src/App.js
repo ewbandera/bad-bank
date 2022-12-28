@@ -12,7 +12,7 @@ import {UserContext} from './components/context'
 
 function App() {
   const [reload, setReload] = React.useState(false);
-  const[state,setState] = React.useState({users:[{name:'Eric Bandera',email:'ericbandera@gmail.com',password:'81dc9bdb52d04dc20036dbd8313ed055',balance:100}]})
+  const[state,setState] = React.useState({users:[{name:'Eric Bandera',email:'ericbandera@gmail.com',password:'1234',balance:100}]})
   function doRefresh(context){
     setState(context);
     setReload(!reload); //will toggle so that it changes every time

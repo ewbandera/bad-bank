@@ -59,6 +59,7 @@ function Deposit(){
   {
     setAmount(0);
     setShow(true);
+    setBtDisabled(true);
     setStatus('');
   }
   return (

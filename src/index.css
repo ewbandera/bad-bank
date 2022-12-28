@@ -69,6 +69,13 @@ code {
     text-align: left;
 }
 
+.nav-link:focus {
+  color: white !important;
+  text-decoration:underline !important;
+}
+.nav-link:hover {
+  color:#30718E !important;
+}
 .allDataTable th,
   .allDataTable td {
       padding: 12px 15px;

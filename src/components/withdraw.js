@@ -26,7 +26,6 @@ function Withdraw(){
      else{
       setBtDisabled(true);
      }
-    
   }
   function validate(input)
   {
@@ -60,6 +59,7 @@ function Withdraw(){
   function clearForm()  {
     setAmount(0);
     setShow(true);
+    setBtDisabled(true);
     setStatus('');
   }
   return (
