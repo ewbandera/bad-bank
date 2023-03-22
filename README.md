@@ -1,6 +1,8 @@
 # bad-bank
-Bad Bank Project
-Description:  Front End Bad Banking application to demonstrate React, Bootstrap, and an integrated use of components
-To Use:  Launch the website.  There is an auto-login button on the homepage since this is just a demonstration.  Navigate the site, deposit and withdraw money.  Create Accounts, and interact.
-Roadmap for future improvements:  Persistance of data with a database
+Project Title: Bad Bank Project
+Description:  Full Stack application demonstrating use of the React Framework along with Firebase authentication and authorization.  Leverages Express and MongoDb for API driven web application.
+To Use:  Clone the environment using git clone and the project url.  Then run npm install in the appropriate directories for the react and express servers.  Docker must be installed.  use docker run -p 27017:27017 --name badbank -d mongo to bring the mongo db service up.  use node index.js in the express server directory and also npm start in the React directory.  
+Screenshots:
+Technology Used:  MERN stack - Mongo DB, Express, React and Node Js
+Features: Ability to Login with authenticate and authorization to allow users a distinct experience.  Allow authenticated users to made deposits, withdraws, and review balances to their account.  Allow administrators an experience to depost, witthdraw and see balances of all users.
 License:  Mit License.  See License for more details
